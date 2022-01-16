@@ -1,0 +1,82 @@
+.ChatStatusDropdown {
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  display: none;
+  z-index: 1;
+  top: 45px;
+  right: 0;
+  min-width: 10rem;
+  padding: 1.5rem;
+  margin: 0;
+  font-size: 1rem;
+  color: #515184;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 0;
+  border-radius: 0.3rem;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+}
+
+.show {
+  display: block !important;
+}
+
+.Modal {
+  position: absolute;
+  z-index: 1;
+  top: 45px;
+  right: 0;
+  min-width: 10rem;
+  padding: 1.5rem;
+  margin: 0;
+  font-size: 1rem;
+  color: #515184;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 0;
+  border-radius: 0.3rem;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+  transition: all 0.3s ease-out;
+}
+.ModalOpen {
+  animation: openModal 0.4s ease-out forwards;
+}
+.ModalClosed {
+  animation: closeModal 0.4s ease-out forwards;
+}
+
+@keyframes openModal {
+  0% {
+    transform: translateX(500px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes closeModal {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(500px);
+  }
+}
+
+.Modal > h4 {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  color: #adb5bd;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0;
+}

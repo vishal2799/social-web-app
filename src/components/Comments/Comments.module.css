@@ -1,0 +1,19 @@
+.Comments {
+  padding: 10px;
+}
+
+.Comments > div > div > div > h4 {
+  white-space: normal;
+}
+
+.Comments > div > div {
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.Comments > div > div > div {
+  background: aqua;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin-left: 10px;
+}

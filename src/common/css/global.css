@@ -1,0 +1,12 @@
+.widgetWrapper {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.widgetWrapper2 {
+  background-color: white;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}

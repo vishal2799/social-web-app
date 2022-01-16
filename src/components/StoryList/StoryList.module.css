@@ -1,0 +1,5 @@
+.StoryList {
+  display: flex;
+  padding-bottom: 20px;
+  flex-wrap: wrap;
+}

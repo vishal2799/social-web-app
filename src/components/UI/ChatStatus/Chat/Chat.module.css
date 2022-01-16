@@ -1,0 +1,12 @@
+.Dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 8px;
+  background-color: #10d876;
+  display: inline-block;
+  line-height: 25px !important;
+  text-align: center;
+  font-size: 12px;
+  color: #999;
+  margin-top: 3px;
+}

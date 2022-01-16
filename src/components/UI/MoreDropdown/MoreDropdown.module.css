@@ -1,0 +1,31 @@
+.MoreDropdown {
+  position: relative;
+}
+
+.MoreDropdown > div {
+  position: absolute;
+  z-index: 1;
+  top: 45px;
+  right: 0;
+  min-width: 10rem;
+  padding: 1.5rem;
+  margin: 0;
+  font-size: 1rem;
+  color: #515184;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 0;
+  border-radius: 0.3rem;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+}
+
+.MoreWrapper > h4 {
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  color: #111;
+  font-size: 16px;
+  margin-top: 0;
+}

@@ -1,0 +1,13 @@
+.UserDetail {
+  display: flex;
+  align-items: center;
+}
+
+.UserDetail > img {
+  width: 50px;
+  height: 50px;
+}
+
+.UserDetail > div {
+  margin-left: 15px;
+}

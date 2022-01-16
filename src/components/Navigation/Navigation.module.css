@@ -1,0 +1,59 @@
+.Container {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 90px;
+  padding: 0 10px;
+}
+
+.Container > div:first-child {
+  width: 25%;
+}
+
+.Container > div:last-child {
+  width: 75%;
+}
+
+.Logo {
+  text-align: left;
+}
+
+.Logo > img {
+  width: 100px;
+}
+
+.Container2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Container2 > div:first-child {
+  width: 40%;
+  text-align: left;
+}
+
+.Container2 > div:last-child {
+  width: 60%;
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.Search {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.Search > svg {
+  z-index: 100;
+  margin-right: -35px;
+}
+
+.Search > input {
+  width: 70%;
+  padding: 10px;
+  border-radius: 25px;
+}

@@ -1,0 +1,30 @@
+.Post {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.Post > img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.PostProfile {
+  display: flex;
+  justify-content: space-between;
+}
+
+.PostSocial {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.PostSocial > div {
+  display: flex;
+  align-items: center;
+}

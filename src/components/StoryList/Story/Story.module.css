@@ -1,0 +1,32 @@
+.Story {
+  position: relative;
+  width: 125px;
+  height: 200px;
+  border-radius: 10px;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+
+.Story::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: rgb(75, 153, 226);
+  opacity: 0.3;
+  border-radius: 10px;
+}
+
+.Story > div {
+  position: absolute;
+  transform: translate(-50%, -80%);
+  top: 80%;
+  left: 50%;
+  text-align: center;
+}
+
+.Story > div > img {
+  width: 50px;
+}

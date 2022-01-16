@@ -1,0 +1,44 @@
+.Input {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.Input > svg {
+  z-index: 100;
+  margin-right: -35px;
+}
+
+.Input > input {
+  width: 70%;
+  padding: 10px;
+  border-radius: 25px;
+}
+
+.InputContainer {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  width: 100%;
+  border: 2px solid black;
+  border-radius: 30px;
+  box-sizing: border-box;
+}
+
+.InputContainer svg {
+  padding: 10px 0 10px 10px;
+  background: transparent;
+  color: black;
+  text-align: center;
+}
+
+.InputField {
+  width: 80%;
+  padding: 10px;
+  outline: none;
+  border: none;
+  background-color: inherit;
+}
+
+.InputContainer:focus {
+  border: 2px solid dodgerblue;
+}

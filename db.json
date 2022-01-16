@@ -1,0 +1,214 @@
+{
+  "users": [
+    {
+      "email": "olivier@mail.com",
+      "password": "$2a$10$WYwJJnQNQFtN.TKFB7eGBurqnKkOc0D7wM5obqg0bu7uNygxQ2/Mu",
+      "id": 1
+    },
+    {
+      "email": "olivier1@mail.com",
+      "password": "$2a$10$H55J3lo1kYziVSwZfPz7he0EgXY.b7Xoez.Sr2bOQl3jor7j89x9W",
+      "id": 2
+    },
+    {
+      "email": "disisvishal@mail.com",
+      "password": "$2a$10$FTCq5No5luu79amGQF1Vyuw1vacZQCjoFNys5b8zyQSU9wxN.dzju",
+      "id": 3,
+      "img": "./images/user-7.png",
+      "name": "Alicia Bunker"
+    },
+    {
+      "email": "vishal@mail.com",
+      "password": "$2a$10$2G2dZJzWGqB/qQ2REazqPe82a/q/B7oQ8DzbJbmNN9WNadHm.6kvG",
+      "expiresIn": "12345678",
+      "id": 4
+    }
+  ],
+  "posts": [
+    {
+      "userImg": "./images/user-7.png",
+      "userName": "Aiden Markram",
+      "time": "14",
+      "caption": "Post from userId 3",
+      "likesCount": 2,
+      "commentsCount": 2,
+      "sharesCount": 1,
+      "postImg": "./images/t-10.jpeg",
+      "userId": 3,
+      "id": 1
+    }
+  ],
+  "suggestPages": [
+    {
+      "id": 1,
+      "pageImg": "./images/g-2.jpeg",
+      "label": "Like Page"
+    },
+    {
+      "id": 2,
+      "pageImg": "./images/g-3.jpeg",
+      "label": "Like Page"
+    }
+  ],
+  "stories": [
+    {
+      "id": 1,
+      "storyImg": "./images/s-1.jpeg",
+      "personImage": "./images/user-11.png",
+      "name": "Alicia Bunker"
+    },
+    {
+      "id": 2,
+      "storyImg": "./images/s-2.jpeg",
+      "personImage": "./images/user-2.png",
+      "name": "Alicia Bunker"
+    },
+    {
+      "id": 3,
+      "storyImg": "./images/s-6.jpeg",
+      "personImage": "./images/user-3.png",
+      "name": "Alicia Bunker"
+    },
+    {
+      "id": 4,
+      "storyImg": "./images/s-5.jpeg",
+      "personImage": "./images/user-8.png",
+      "name": "Alicia Bunker"
+    },
+    {
+      "id": 5,
+      "storyImg": "./images/s-8.jpeg",
+      "personImage": "./images/user-4.png",
+      "name": "Alicia Bunker"
+    },
+    {
+      "id": 6,
+      "storyImg": "./images/s-1.jpeg",
+      "personImage": "./images/user-7.png",
+      "name": "Alicia Bunker"
+    },
+    {
+      "id": 7,
+      "storyImg": "./images/s-1.jpeg",
+      "personImage": "./images/user-7.png",
+      "name": "Alicia Bunker"
+    },
+    {
+      "id": 8,
+      "storyImg": "./images/s-1.jpeg",
+      "personImage": "./images/user-7.png",
+      "name": "Alicia Bunker"
+    },
+    {
+      "id": 9,
+      "storyImg": "./images/s-1.jpeg",
+      "personImage": "./images/user-7.png",
+      "name": "Alicia Bunker"
+    },
+    {
+      "id": 10,
+      "storyImg": "./images/s-1.jpeg",
+      "personImage": "./images/user-7.png",
+      "name": "Alicia Bunker"
+    },
+    {
+      "id": 11,
+      "storyImg": "./images/s-1.jpeg",
+      "personImage": "./images/user-7.png",
+      "name": "Alicia Bunker"
+    },
+    {
+      "id": 12,
+      "storyImg": "./images/s-1.jpeg",
+      "personImage": "./images/user-7.png",
+      "name": "Alicia Bunker"
+    }
+  ],
+  "friendRequests": [
+    {
+      "id": 1,
+      "pName": "Alicia Bunker",
+      "pImg": "./images/user-7.png",
+      "mutual": "11"
+    },
+    {
+      "id": 2,
+      "pName": "Naomi Sie",
+      "pImg": "./images/user-7.png",
+      "mutual": "13"
+    }
+  ],
+  "comments": [
+    {
+      "comment": "comment by user 3 in post 1",
+      "name": "Alicia Bunker",
+      "img": "./images/user-7.png",
+      "postId": 1,
+      "userId": 3,
+      "id": 1
+    },
+    {
+      "comment": "comment in 1st post by user 3",
+      "name": "Vishal",
+      "img": "./images/user-3.png",
+      "postId": 1,
+      "userId": 4,
+      "id": 2
+    },
+    {
+      "comment": "New Comment in post 1 by user 3 11:24",
+      "postId": 1,
+      "userId": 3,
+      "img": "./images/user-7.png",
+      "name": "Alicia Bunker",
+      "id": 3
+    }
+  ],
+  "likes": [
+    {
+      "id": 2,
+      "userId": 4,
+      "name": "Vishal",
+      "postId": 1,
+      "img": "./images/user-3.png"
+    },
+    {
+      "postId": 1,
+      "userId": 3,
+      "img": "./images/user-7.png",
+      "name": "Alicia Bunker",
+      "id": 3
+    },
+    {
+      "postId": 1,
+      "userId": 3,
+      "img": "./images/user-7.png",
+      "name": "Alicia Bunker",
+      "id": 4
+    }
+  ],
+  "userProfile": [
+    {
+      "id": 1,
+      "user": {
+        "name": "Alicia Bunker",
+        "userId": 3,
+        "img": "./images/user-7.png",
+        "email": "disisvishal@mail.com"
+      }
+    },
+    {
+      "email": "vishal@mail.com",
+      "userId": 4,
+      "name": "nikku",
+      "id": 2
+    }
+  ],
+  "followingRelationships": [
+    {
+      "id": 1,
+      "userId": 3,
+      "followingId": 4
+    }
+  ]
+}
