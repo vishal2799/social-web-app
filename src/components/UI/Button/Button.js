@@ -49,7 +49,7 @@ function Button({textColor, iconColor, iconBackgroundColor,variant, children, di
                     {children}
                     </button>
             } else {
-            button = <button className={classes.Contained} onClick={onClick} style={{marginRight: mr ? mr : ''}}>{children}</button>
+            button = <button className={classes.Contained} onClick={onClick} style={{marginRight: mr ? mr : '', width: width ? width : ''}}>{children}</button>
             }
             break;
         default:

@@ -7,6 +7,8 @@ const PostContextProvider = (props) => {
 
     const [isLoading, setIsLoading] = useState(false);
 
+    const [addLikeLoading, setAddLikeLoading] = useState(false);
+
     const [loadingComments, setLoadingComments] = useState(false);
 
   const [posts, setPosts] = useState([]);
@@ -37,12 +39,13 @@ const PostContextProvider = (props) => {
     })
     .catch(function(error) {
         console.log(error);
+        setIsLoading(false);
     })
   }
 
-  const getComments = (id) => {
+  const getComments = (postId) => {
     setLoadingComments(true);
-    let url = "http://localhost:3000/comments";
+    let url = "http://localhost:3000/comments?postId=" + postId;
     let token = localStorage.getItem('user');
     token = JSON.parse(token).accessToken;
     axios.get(url, {
@@ -56,12 +59,13 @@ const PostContextProvider = (props) => {
     })
     .catch(function(error) {
       console.log(error);
+      setLoadingComments(false);
     })
   }
 
-  const getLikes = (id) => {
+  const getLikes = (postId, callback) => {
     setLoadingLikes(true);
-    let url = "http://localhost:3000/likes";
+    let url = "http://localhost:3000/likes?postId=" + postId;
     let token = localStorage.getItem('user');
     token = JSON.parse(token).accessToken;
     axios.get(url, {
@@ -72,8 +76,10 @@ const PostContextProvider = (props) => {
     .then(function (res) {
       setLikes(res.data);
       setLoadingLikes(false);
+      callback(res.data);
     })
     .catch(function(error) {
+      setLoadingLikes(false);
       console.log(error);
     })
   }
@@ -118,12 +124,33 @@ const PostContextProvider = (props) => {
       });  
   };
 
-  const addLike = (postId) => {
+
+   const addLike = (liked, likedId, postId) => {
+    if(liked) {
+      setAddLikeLoading(true);
+      let url = "http://localhost:3000/likes/" + likedId;
+      let token = localStorage.getItem('user');
+      token = JSON.parse(token).accessToken;
+      axios.delete(url, {
+          headers: {
+              'Authorization': `Bearer ${token}`
+            }
+      })
+      .then((res) => {
+          setLikes(prev => (prev.filter(like => like.id !== likedId)));
+          setAddLikeLoading(false);
+          console.log(res + 'addLike new delete');
+      })
+      .catch(err => {
+          setAddLikeLoading(false);
+      })
+    } else {
+      setAddLikeLoading(true);
     let url = "http://localhost:3000/likes";
     let userId = localStorage.getItem('user');
-      userId = JSON.parse(userId).user.id;
+    userId = JSON.parse(userId).user.id;
     let img = localStorage.getItem('user');
-      img = JSON.parse(img).user.img;
+    img = JSON.parse(img).user.img;
     let name = localStorage.getItem('user');
     name = JSON.parse(name).user.name;
     let token = localStorage.getItem('user');
@@ -133,13 +160,15 @@ const PostContextProvider = (props) => {
       })
       .then(function (response) {
         console.log(response);
-        setLikes([...likes, {id: response.data.id, userId, name, img}])
-        setIsLoading(false);
+        setLikes(prev => ([...prev, {id: response.data.id, userId, name, img}]))
+        setAddLikeLoading(false);
+        console.log(response + 'addlike new like')
     })
       .catch(function (error) {
-        setIsLoading(false);
+        setAddLikeLoading(false);
       });  
-  };
+    }
+   };
 
   const removeLike = (id) => {
     let url = "http://localhost:3000/likes" + id;
@@ -151,7 +180,7 @@ const PostContextProvider = (props) => {
           }
     })
     .then((res) => {
-        setLikes(likes.filter(like => like.id !== id));
+        setLikes(prev => (prev.filter(like => like.id !== id)));
     })
     .catch(err => {
         setIsLoading(false);
@@ -190,7 +219,7 @@ const PostContextProvider = (props) => {
   }
 
   return (
-    <PostContext.Provider value={{ posts, addPost, removePost, getPosts, isLoading, addComment, addLike, getComments, comments, loadingComments, getLikes, likes, loadingLikes, isLiked }}>
+    <PostContext.Provider value={{ posts, addPost, removePost, getPosts, isLoading, addComment, addLike, getComments, comments, loadingComments, getLikes, likes, loadingLikes, isLiked, addLikeLoading }}>
       {props.children}
     </PostContext.Provider>
   );

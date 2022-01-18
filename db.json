@@ -22,6 +22,13 @@
       "password": "$2a$10$2G2dZJzWGqB/qQ2REazqPe82a/q/B7oQ8DzbJbmNN9WNadHm.6kvG",
       "expiresIn": "12345678",
       "id": 4
+    },
+    {
+      "email": "craft@mail.com",
+      "password": "$2a$10$/F.WqUCzeqUivZkPt7jLnO3aRfV4KU4Z00ETEJeAXV4r4LpibR9Fe",
+      "name": "craft World",
+      "img": "./images/user-7.png",
+      "id": 5
     }
   ],
   "posts": [
@@ -36,6 +43,18 @@
       "postImg": "./images/t-10.jpeg",
       "userId": 3,
       "id": 1
+    },
+    {
+      "userImg": "./images/user-11.png",
+      "userName": "Joe Biden",
+      "time": "14",
+      "caption": "Post from userId 5",
+      "likesCount": 2,
+      "commentsCount": 2,
+      "sharesCount": 1,
+      "postImg": "./images/t-10.jpeg",
+      "userId": 5,
+      "id": 2
     }
   ],
   "suggestPages": [
@@ -161,7 +180,31 @@
       "userId": 3,
       "img": "./images/user-7.png",
       "name": "Alicia Bunker",
-      "id": 3
+      "id": 4
+    },
+    {
+      "comment": "vbhlkchlv",
+      "postId": 1,
+      "userId": 3,
+      "img": "./images/user-7.png",
+      "name": "Alicia Bunker",
+      "id": 5
+    },
+    {
+      "comment": "Wow",
+      "postId": 1,
+      "userId": 5,
+      "img": "./images/user-7.png",
+      "name": "craft World",
+      "id": 6
+    },
+    {
+      "comment": "Wow",
+      "postId": 2,
+      "userId": 5,
+      "img": "./images/user-7.png",
+      "name": "craft World",
+      "id": 7
     }
   ],
   "likes": [
@@ -181,10 +224,52 @@
     },
     {
       "postId": 1,
+      "userId": 5,
+      "img": "./images/user-7.png",
+      "name": "craft World",
+      "id": 4
+    },
+    {
+      "postId": 1,
+      "userId": 5,
+      "img": "./images/user-7.png",
+      "name": "craft World",
+      "id": 5
+    },
+    {
+      "postId": 1,
+      "userId": 5,
+      "img": "./images/user-7.png",
+      "name": "craft World",
+      "id": 6
+    },
+    {
+      "postId": 1,
+      "userId": 5,
+      "img": "./images/user-7.png",
+      "name": "craft World",
+      "id": 7
+    },
+    {
+      "postId": 2,
+      "userId": 5,
+      "img": "./images/user-7.png",
+      "name": "craft World",
+      "id": 8
+    },
+    {
+      "postId": 1,
       "userId": 3,
       "img": "./images/user-7.png",
       "name": "Alicia Bunker",
-      "id": 4
+      "id": 9
+    },
+    {
+      "postId": 1,
+      "userId": 3,
+      "img": "./images/user-7.png",
+      "name": "Alicia Bunker",
+      "id": 10
     }
   ],
   "userProfile": [
@@ -202,6 +287,13 @@
       "userId": 4,
       "name": "nikku",
       "id": 2
+    },
+    {
+      "name": "craft World",
+      "userId": 5,
+      "email": "craft@mail.com",
+      "img": "./images/user-7.png",
+      "id": 3
     }
   ],
   "followingRelationships": [
@@ -209,6 +301,16 @@
       "id": 1,
       "userId": 3,
       "followingId": 4
+    },
+    {
+      "id": 2,
+      "userId": 3,
+      "followingId": 5
+    },
+    {
+      "id": 3,
+      "userId": 5,
+      "followingId": 3
     }
   ]
 }

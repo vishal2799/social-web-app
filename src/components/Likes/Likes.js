@@ -7,8 +7,8 @@ const Likes = (props) => {
     const { likes, getLikes, loadingLikes } = useContext(PostContext);
     
     useEffect(() => {
-        getLikes();
-      }, [])
+        getLikes(props.postId);
+      }, [props.postId])
 
       return !loadingLikes ? (
         <div>

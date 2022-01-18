@@ -78,8 +78,10 @@ const AuthContextProvider = (props) => {
         for(let following of followings) {
           if(following.followingId === +id) {
             setFollowing(true);
+            console.log('following')
           } else {
             setFollowing(false);
+            console.log('not following')
           }
         }
       }

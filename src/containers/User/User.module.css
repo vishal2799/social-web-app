@@ -1,0 +1,66 @@
+.Container {
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.Profile {
+  background: white;
+  text-align: center;
+  padding: 25px 15px;
+  border-radius: 10px;
+  width: 35%;
+  height: -webkit-fill-available;
+}
+
+.Profile img {
+  width: 100px;
+}
+
+.ProfileDetails {
+  display: flex;
+  justify-content: center;
+}
+
+.ProfileDetails > div {
+  padding: 0 20px;
+}
+
+.ProfileDetails > div > h4 {
+  margin: 0;
+}
+
+.ProfileDetails > div > p {
+  margin: 0;
+  margin-top: 5px;
+  font-size: 10px;
+  font-weight: 300;
+}
+
+.ProfileDetails > div:nth-child(2) {
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+}
+
+.CTA {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.CTA > span {
+  background-color: #eee;
+  padding: 10px;
+  border-radius: 8px;
+  margin-left: 10px;
+}
+
+.Post {
+  width: 65%;
+  margin-left: 10px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.Post > div > div {
+  padding: 10px 20px;
+}
