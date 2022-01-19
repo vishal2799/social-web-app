@@ -34,7 +34,7 @@ const Navigation = ({logout}) => {
                 <div style={{display: 'flex'}}>
                     <NotificationDropdown />
                     <ChatStatus />
-                    <IconButton>
+                    <IconButton onClick={() => navigate('/settings')}>
                         <SettingsOutlinedIcon />
                     </IconButton>
                     <IconButton onClick={logout}>

@@ -13,6 +13,7 @@ import User from "./containers/User/User";
 import Users from "./routes/Users/Users";
 import Friends from './routes/Friends/Friends'
 import Friend from './routes/Friends/Friend/Friend'
+import Settings from './routes/Settings/Settings'
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
       <Route index element={<Home />} />
       <Route path="profile" element={<Profile />} />
       <Route path="stories" element={<Stories />} />
+      <Route path="settings" element={<Settings />}/>
       <Route path="search" element={<Search />} />
       <Route path="friends" element={<Friends />}>
       <Route

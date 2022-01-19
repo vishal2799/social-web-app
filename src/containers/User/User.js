@@ -11,125 +11,71 @@ import ArrowBackIosOutlinedIcon from '@mui/icons-material/ArrowBackIosOutlined';
 import Button from '../../components/UI/Button/Button'
 import classes from './User.module.css'
 import IconButton from '../../components/UI/IconButton/IconButton';
-import UserImg from '../../assets/images/user-11.png'
-import UserDetail from '../../components/UI/UserDetail/UserDetail';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
-import PostList from '../../components/Post/PostList/PostList'
-import PostContextProvider from '../../Context/Post/PostContext';
 import GridOnOutlinedIcon from '@mui/icons-material/GridOnOutlined';
 import SlowMotionVideoOutlinedIcon from '@mui/icons-material/SlowMotionVideoOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 
 function User() {
 
-    let [followings, setFollowings] = useState([]);
-    let [followers, setFollowers] = useState([]);
-    let [followingLoading, setFollowingLoading] = useState(false);
-    let [following, setFollowing] = useState(false);
-
     let navigate = useNavigate();
     let params = useParams();
     const { user } = useContext(AuthContext)
 
     let [loading, setLoading] = useState(false);
+    let [profile, setProfile] = useState();
+    let [followings, setFollowings] = useState([]);
+    let [followers, setFollowers] = useState([]);
+    let [following, setFollowing] = useState(false);
     
-    useEffect(() => {
-        getFollowings(params.userId);
-        //isFollowing(params.userId);
-    }, [params.userId]);
 
-    useEffect(() => {
-        getFollowers(params.userId);
-    }, [params.userId])
-
-
-    const getFollowers = (id) => {
-        setLoading(true);
-        let url = `http://localhost:3000/followingRelationships?followingId=${id}` 
-        let token = localStorage.getItem('user');
-        token = JSON.parse(token).accessToken;
-        axios.get(url, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-        .then((res) => {
-            console.log(res.data);
-            setFollowers(res.data);
-            for(let data of res.data) {
-                if(data.userId === user.user.id) {
-                  setFollowing(true);
-                  console.log('following')
-                  setLoading(false);
-                } else {
-                  setFollowing(false);
-                  console.log('not following')
-                  setLoading(false);
-                }
-              }
-            setLoading(false);
-        })
-        .catch(function(error) {
-            console.log(error);
-            setLoading(false);
-        })
+    if(user.user.id == params.userId) {
+        navigate("/profile")
     }
 
-    const getFollowings = (id) => {
-            setLoading(true);
-            let url = `http://localhost:3000/followingRelationships?userId=${id}` 
-            let token = localStorage.getItem('user');
-            token = JSON.parse(token).accessToken;
-            axios.get(url, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            .then(function (res) {
-                setFollowings(res.data);
-                setLoading(false);
-            })
-            .catch(function(error) {
-                console.log(error);
-                setLoading(false);
-            })
-        }
+    const isFollowing = (dataa) => {
+        for(let data of dataa) {
+            if(data.userId === user.user.id) {
+              setFollowing(true);
+            } else {
+              setFollowing(false);
+            }
+          }
+    }
 
-    // const getFollowings = (id) => {
-    //     setLoading(true);
-    //     let url = `http://localhost:3000/followingRelationships?userId=${user.user.id}` 
-    //     let token = localStorage.getItem('user');
-    //     token = JSON.parse(token).accessToken;
-    //     axios.get(url, {
-    //         headers: {
-    //             'Authorization': `Bearer ${token}`
-    //         }
-    //     })
-    //     .then(function (res) {
-    //         setFollowings(res.data);
-    //         for(let following of res.data) {
-    //             if(following.followingId === +id) {
-    //               setFollowing(true);
-    //               console.log('following')
-    //               setLoading(false);
-    //             } else {
-    //               setFollowing(false);
-    //               console.log('not following')
-    //               setLoading(false);
-    //             }
-    //           }
-    //         setLoading(false);
-    //     })
-    //     .catch(function(error) {
-    //         console.log(error);
-    //         setLoading(false);
-    //     })
-    // }
-     
-  
+    const getUserData = (id) => {
+        setLoading(true);
+        let token = localStorage.getItem('user');
+        token = JSON.parse(token).accessToken;
+        let endpoints = [
+          `http://localhost:3000/userProfile?userId=${id}`,
+          `http://localhost:3000/followingRelationships?followingId=${id}`,
+          `http://localhost:3000/followingRelationships?userId=${id}`
+        ];
+
+          Promise.all(endpoints.map((endpoint) => axios.get(endpoint, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          }))).then(([{data: user}, {data: followers}, {data: following}] )=> {
+            // console.log({ user, followers, following });
+            setFollowings(following);
+            setProfile(user[0]);
+            setFollowers(followers);
+            isFollowing(followers);
+            setLoading(false);
+      }); 
+
+}
+    
+useEffect(() => {
+        getUserData(params.userId);
+    }, [params.userId]);
+    
+   
     let followersofuser;
-    let followingsofuser
+    let followingsofuser;
     if(loading){
      followersofuser = <div>Loading Followers...</div>;
      followingsofuser = <div>Loading Followings...</div>;
@@ -155,24 +101,24 @@ function User() {
         </div>
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
             <div className={classes.Profile}>
-                <img src={UserImg} />
-                <h4>Alicia Bunker</h4>
+                <img src={profile && profile.img} />
+                <h4>{profile && profile.name}</h4>
                 <div className={classes.ProfileDetails}>
                     <div>
                         <h4>3</h4>
                         <p>Posts</p>
                     </div>
                     <div>
-                        <h4>92</h4>
+                        <h4>{followers.length}</h4>
                         <p>Followers</p>
                     </div>
                     <div>
-                        <h4>121</h4>
+                        <h4>{followings.length}</h4>
                         <p>Following</p>
                     </div>
                 </div>
                 <div className={classes.CTA}>
-                    <Button variant="contained">Follow</Button>
+                    <Button variant="contained">{following ? 'Following' : 'Follow'}</Button>
                     <span><IconButton><EmailOutlinedIcon /></IconButton></span>
                     <span><IconButton><MoreHorizOutlinedIcon /></IconButton></span>
                 </div>
