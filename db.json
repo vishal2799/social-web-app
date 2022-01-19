@@ -11,11 +11,11 @@
       "id": 2
     },
     {
-      "email": "disisvishal@mail.com",
-      "password": "$2a$10$FTCq5No5luu79amGQF1Vyuw1vacZQCjoFNys5b8zyQSU9wxN.dzju",
-      "id": 3,
+      "name": "Vishal Sharma",
+      "email": "disisal@mail.com",
       "img": "./images/user-7.png",
-      "name": "Alicia Bunker"
+      "password": "$2a$10$x0Ljxr1qmRO4eS49oXu8uuvxOxVuowbB9jce8SBm9Ft861UfyTUkC",
+      "id": 3
     },
     {
       "email": "vishal@mail.com",
@@ -274,13 +274,11 @@
   ],
   "userProfile": [
     {
-      "id": 1,
-      "user": {
-        "name": "Alicia Bunker",
-        "userId": 3,
-        "img": "./images/user-7.png",
-        "email": "disisvishal@mail.com"
-      }
+      "name": "Vishal Sharma",
+      "email": "disisal@mail.com",
+      "img": "./images/user-7.png",
+      "userId": 3,
+      "id": 1
     },
     {
       "email": "vishal@mail.com",

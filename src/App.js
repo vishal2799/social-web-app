@@ -14,6 +14,7 @@ import Users from "./routes/Users/Users";
 import Friends from './routes/Friends/Friends'
 import Friend from './routes/Friends/Friend/Friend'
 import Settings from './routes/Settings/Settings'
+import AccountInformation from './routes/Settings/Account-Information/Account-Information';
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
       <Route path="profile" element={<Profile />} />
       <Route path="stories" element={<Stories />} />
       <Route path="settings" element={<Settings />}/>
+      <Route path="account-information" element={<AccountInformation />} />
       <Route path="search" element={<Search />} />
       <Route path="friends" element={<Friends />}>
       <Route

@@ -30,7 +30,7 @@ const Navigation = ({logout}) => {
                 <img src={logo} />
             </div>
             <div className={classes.Container2}>
-                    <InputWithIcon placeholder="Search" icon={<SearchIcon />} border="none" background="#eee" onClick={searchPage}/>
+                    <InputWithIcon variant="text" placeholder="Search" icon={<SearchIcon />} border="none" background="#eee" onClick={searchPage}/>
                 <div style={{display: 'flex'}}>
                     <NotificationDropdown />
                     <ChatStatus />

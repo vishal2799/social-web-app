@@ -1,0 +1,12 @@
+.SettingsWrapper {
+  background-color: white;
+  border-radius: 10px;
+  margin: 10px auto;
+  width: 50% !important;
+  padding: 50px 40px !important;
+}
+
+.SettingsWrapper h1 {
+  margin: 0;
+  margin-left: 15px;
+}
