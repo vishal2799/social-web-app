@@ -32,8 +32,8 @@ const Login = () => {
        </div>
     <div style={{width: '50%', margin: 'auto', paddingTop: '50px', textAlign: 'center'}}>
       <h1 style={{textAlign: 'left'}}>Login into<br />your account</h1>
-      <InputWithIcon mb="20px" icon={<MailOutlineIcon />} onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Email" />
-      <InputWithIcon mb="20px" icon={<LockOutlinedIcon />} onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Password" />
+      <InputWithIcon variant="text" mb="20px" icon={<MailOutlineIcon />} onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Email" />
+      <InputWithIcon variant="password" mb="20px" icon={<LockOutlinedIcon />} onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Password" />
       <Button variant="contained" width="100%" onClick={handleSubmit}>Login</Button>
       <p style={{textAlign: 'left'}}>Don't have an account <Link to="/signup" style={{textDecoration: 'none', color: 'blue'}}>Signup</Link></p>
     </div>

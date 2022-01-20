@@ -15,6 +15,8 @@ import Friends from './routes/Friends/Friends'
 import Friend from './routes/Friends/Friend/Friend'
 import Settings from './routes/Settings/Settings'
 import AccountInformation from './routes/Settings/Account-Information/Account-Information';
+import Password from './routes/Settings/Password/Password';
+import Social from './routes/Settings/Social/Social';
 
 function App() {
 
@@ -29,6 +31,8 @@ function App() {
       <Route path="stories" element={<Stories />} />
       <Route path="settings" element={<Settings />}/>
       <Route path="account-information" element={<AccountInformation />} />
+      <Route path="password" element={<Password />} />
+      <Route path="social" element={<Social />} />
       <Route path="search" element={<Search />} />
       <Route path="friends" element={<Friends />}>
       <Route

@@ -19,13 +19,50 @@ function AccountInformation() {
     let [email, setEmail] = useState('');
     let [bio, setBio] = useState('');
     let [img, setImg] = useState('./images/user-7.png');
+    let [verified, setVerified] = useState(false);
 
     useEffect(() => {
         getInfo();
     }, [])
 
+    const verifyData = () => {
+    setLoading(true);
+    let emailId = localStorage.getItem('user');
+    emailId = JSON.parse(emailId).user.email;
+    if(email == emailId) {
+        setVerified(true);
+        setLoading(false);
+        return;
+    }
+    let url = "http://localhost:3000/userProfile";
+    let token = localStorage.getItem('user');
+    token = JSON.parse(token).accessToken;
+    axios.get(url, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(function (res) {
+        for(let data of res.data) {
+            if(data.email === email) {
+              alert("Please enter your email id");
+              setLoading(false);
+              setVerified(false);
+              return;
+            }
+            setVerified(true);
+          }})
+    .catch(function(error) {
+      setLoading(false);
+      console.log(error);
+    })
+
+    }
+
 
     const changeUserData = () => {
+       verifyData();
+       if(verified && !loading){
         setLoading(true);
         let userId = localStorage.getItem('user');
         userId = JSON.parse(userId).user.id;
@@ -33,7 +70,7 @@ function AccountInformation() {
         token = JSON.parse(token).accessToken;
         let endpoints = [{
           url:`http://localhost:3000/users/${userId}`, 
-          data: {name, email, img, password: "bestpasswordd"}
+          data: {name, email, img, password: "bestpassword"}
         },
           {
           url:`http://localhost:3000/userProfile/${info.id}`, 
@@ -48,8 +85,14 @@ function AccountInformation() {
             console.log(users, userProfile);
             setLoading(false);
             navigate(-1);
-      }); 
+         })
+        .catch(function(error) {
+        setLoading(false);
+        navigate(-1);
+        console.log(error);
+      })
 
+       }
 }
 
     const getInfo = () => {
@@ -93,7 +136,8 @@ function AccountInformation() {
                 </div>
                 <div className={classes.Input}>
                     <h4>Email</h4>
-                    <InputWithIcon variant="text" icon={<EmailOutlinedIcon />} value={email} placeholder="Edit Your Email" />
+                    <InputWithIcon variant="text" icon={<EmailOutlinedIcon />} value={email} 
+                    onChange={(e) => setEmail(e.target.value)} placeholder="Edit Your Email" />
                 </div>
                 </div>
                 <div style={{display: 'flex', flexDirection: 'column'}}>

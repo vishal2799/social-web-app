@@ -36,9 +36,9 @@ const Signup = () => {
        </div>
     <div style={{width: '50%', margin: 'auto', paddingTop: '50px', textAlign: 'center'}}>
       <h1 style={{textAlign: 'left'}}>Create your<br />your account</h1>
-      <InputWithIcon mb="20px" icon={<PersonOutlinedIcon />} onChange={(e) => setName(e.target.value)} value={name} placeholder="Name" />
-      <InputWithIcon mb="20px" icon={<MailOutlineIcon />} onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Email" />
-      <InputWithIcon mb="20px" icon={<LockOutlinedIcon />} onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Password" />
+      <InputWithIcon variant="text" mb="20px" icon={<PersonOutlinedIcon />} onChange={(e) => setName(e.target.value)} value={name} placeholder="Name" />
+      <InputWithIcon variant="text" mb="20px" icon={<MailOutlineIcon />} onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Email" />
+      <InputWithIcon variant="password" mb="20px" icon={<LockOutlinedIcon />} onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Password" />
       <Button variant="contained" width="100%" onClick={handleSubmit}>Signup</Button>
       <p style={{textAlign: 'left'}}>Already have an account <Link to="/login" style={{textDecoration: 'none', color: 'blue'}}>Login</Link></p>
     </div>
