@@ -1,0 +1,27 @@
+.NoMatch {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+}
+
+.NoMatch img {
+  width: 200px;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+.NoMatch h1 {
+  color: #212529;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+}
+
+.NoMatch p {
+  color: #adb5bd;
+  font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
