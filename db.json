@@ -31,10 +31,10 @@
       "id": 5
     },
     {
-      "name": "Nikli",
-      "email": "fine@mail.com",
+      "name": "Nikki",
+      "email": "fine@mail.in",
       "img": "./images/user-7.png",
-      "password": "$2a$10$WlN/hXZC5k6KxHcGeyz0MO.2eBs2f5JHudz5MytI209a2SRHfiycq",
+      "password": "$2a$10$IW7XeCXB/5xdUEtZl5zBY.rtENzLYyz7n.l2cXh8.2IKJMNJrraQi",
       "id": 6
     }
   ],
@@ -301,8 +301,8 @@
       "id": 3
     },
     {
-      "name": "Nikli",
-      "email": "fine@mail.com",
+      "name": "Nikki",
+      "email": "fine@mail.in",
       "img": "./images/user-7.png",
       "userId": 6,
       "id": 4

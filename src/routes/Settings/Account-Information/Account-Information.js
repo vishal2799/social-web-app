@@ -19,21 +19,35 @@ function AccountInformation() {
     let [email, setEmail] = useState('');
     let [bio, setBio] = useState('');
     let [img, setImg] = useState('./images/user-7.png');
-    let [verified, setVerified] = useState(false);
+    let [verified, setVerified] = useState(true);
 
     useEffect(() => {
         getInfo();
     }, [])
 
+
     const verifyData = () => {
     setLoading(true);
+
+    let userId = localStorage.getItem('user');
+        userId = JSON.parse(userId).user.id;
+
+    let endpoints = [{
+          url:`http://localhost:3000/users/${userId}`, 
+          data: {name, email, img, password: "bestpassword"}
+        },
+          {
+          url:`http://localhost:3000/userProfile/${info.id}`, 
+          data: {name, email, img, userId}
+        }];
+
     let emailId = localStorage.getItem('user');
     emailId = JSON.parse(emailId).user.email;
-    if(email == emailId) {
-        setVerified(true);
-        setLoading(false);
-        return;
-    }
+
+    // if(email == emailId) {
+    //     setVerified(true);
+    //     return;
+    // }
     let url = "http://localhost:3000/userProfile";
     let token = localStorage.getItem('user');
     token = JSON.parse(token).accessToken;
@@ -43,15 +57,35 @@ function AccountInformation() {
       }
     })
     .then(function (res) {
+      if(email == emailId) {
+        setVerified(true);
+        return true;
+    }
         for(let data of res.data) {
             if(data.email === email) {
               alert("Please enter your email id");
               setLoading(false);
               setVerified(false);
-              return;
+              throw new Error('Same Email');
             }
-            setVerified(true);
-          }})
+        }
+    })
+    .then(() => {
+        Promise.all(endpoints.map((endpoint) => axios.put(endpoint.url, endpoint.data, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        }))).then(([{data: users}, {data: userProfile}] )=> {
+          console.log(users, userProfile);
+          setLoading(false);
+          navigate(-1);
+       })
+       .catch(err => {
+         console.log(err);
+         setLoading(false);
+       })
+      
+    })
     .catch(function(error) {
       setLoading(false);
       console.log(error);
@@ -60,40 +94,40 @@ function AccountInformation() {
     }
 
 
-    const changeUserData = () => {
-       verifyData();
-       if(verified && !loading){
-        setLoading(true);
-        let userId = localStorage.getItem('user');
-        userId = JSON.parse(userId).user.id;
-        let token = localStorage.getItem('user');
-        token = JSON.parse(token).accessToken;
-        let endpoints = [{
-          url:`http://localhost:3000/users/${userId}`, 
-          data: {name, email, img, password: "bestpassword"}
-        },
-          {
-          url:`http://localhost:3000/userProfile/${info.id}`, 
-          data: {name, email, img, userId}
-        }];
+//     const changeUserData = () => {
+//        verifyData();
+//        if(verified){
+//         setLoading(true);
+//         let userId = localStorage.getItem('user');
+//         userId = JSON.parse(userId).user.id;
+//         let token = localStorage.getItem('user');
+//         token = JSON.parse(token).accessToken;
+//         let endpoints = [{
+//           url:`http://localhost:3000/users/${userId}`, 
+//           data: {name, email, img, password: "bestpassword"}
+//         },
+//           {
+//           url:`http://localhost:3000/userProfile/${info.id}`, 
+//           data: {name, email, img, userId}
+//         }];
 
-          Promise.all(endpoints.map((endpoint) => axios.put(endpoint.url, endpoint.data, {
-            headers: {
-              'Authorization': `Bearer ${token}`
-            }
-          }))).then(([{data: users}, {data: userProfile}] )=> {
-            console.log(users, userProfile);
-            setLoading(false);
-            navigate(-1);
-         })
-        .catch(function(error) {
-        setLoading(false);
-        navigate(-1);
-        console.log(error);
-      })
+//           Promise.all(endpoints.map((endpoint) => axios.put(endpoint.url, endpoint.data, {
+//             headers: {
+//               'Authorization': `Bearer ${token}`
+//             }
+//           }))).then(([{data: users}, {data: userProfile}] )=> {
+//             console.log(users, userProfile);
+//             setLoading(false);
+//             navigate(-1);
+//          })
+//         .catch(function(error) {
+//         setLoading(false);
+//         navigate(-1);
+//         console.log(error);
+//       })
 
-       }
-}
+//        }
+// }
 
     const getInfo = () => {
         setLoading(true);
@@ -149,7 +183,7 @@ function AccountInformation() {
                     <h4>Picture</h4>
                     <InputWithIcon variant="file" icon={<PhotoCameraOutlinedIcon />} placeholder="Choose File" />
                 </div>
-                <Button variant="contained" onClick={changeUserData}>Save</Button>
+                <Button variant="contained" onClick={verifyData}>Save</Button>
                 </div>
             </div>
         </div>

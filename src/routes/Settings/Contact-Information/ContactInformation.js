@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import classes from './Password.module.css'
+import classes from './ContactInformation.module.css'
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import IconButton from '../../../components/UI/IconButton/IconButton'
 import InputWithIcon from '../../../components/UI/InputWithIcon/InputWithIcon'
@@ -9,35 +9,38 @@ import { useNavigate } from 'react-router-dom';
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
 import axios from 'axios'
 import Button from '../../../components/UI/Button/Button'
+import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
+import LocationCityOutlinedIcon from '@mui/icons-material/LocationCityOutlined';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 
-function Password() {
+function ContactInformation() {
     let navigate = useNavigate();
-    let [password, setPassword]= useState();
-    let [newPassword, setNewPassword] = useState();
-    let [confirmPassword, setConfirmPassword] = useState();
+    let [country, setCountry]= useState();
+    let [city, setCity] = useState();
+    let [address, setAddress] = useState();
 
     return (
         <div className={classes.wrapper}>
             <div>
                 <IconButton onClick={() => navigate(-1)}><ArrowBackOutlinedIcon /></IconButton>
-                <h2>Change Password</h2>
+                <h2>Contact Information</h2>
             </div>
             <div>
                 <div style={{display: 'flex', flexDirection: 'column'}}>
                 <div className={classes.Input}>
-                    <h4>Current Password</h4>
-                    <InputWithIcon variant="password" icon={<PersonOutlineOutlinedIcon />} 
-                    onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Enter Your Current Password" />
+                    <h4>Country</h4>
+                    <InputWithIcon variant="text" icon={<LanguageOutlinedIcon />} 
+                    onChange={(e) => setCountry(e.target.value)} value={country} placeholder="Enter Your Country" />
                 </div>
                 <div className={classes.Input}>
-                    <h4>Change Password</h4>
-                    <InputWithIcon variant="password" icon={<EditOutlinedIcon />} value={newPassword} 
-                    onChange={(e) => setNewPassword(e.target.value)} placeholder="Enter Your New Password" />
+                    <h4>City</h4>
+                    <InputWithIcon variant="text" icon={<LocationCityOutlinedIcon />} value={city} 
+                    onChange={(e) => setCity(e.target.value)} placeholder="Enter Your City" />
                 </div>
                 <div className={classes.Input}>
-                    <h4>Confirm Change Password</h4>
-                    <InputWithIcon variant="password" icon={<CheckOutlinedIcon />} value={confirmPassword}
-                    placeholder="Confirm Your New Password" onChange={(e) => setConfirmPassword(e.target.value)} />
+                    <h4>Address</h4>
+                    <InputWithIcon variant="text" icon={<HomeOutlinedIcon />} value={address}
+                    placeholder="Enter Your Address" onChange={(e) => setAddress(e.target.value)} />
                 </div>
                 <Button variant="contained">Save</Button>
                 </div>
@@ -46,4 +49,4 @@ function Password() {
     );
 }
 
-export default Password
+export default ContactInformation
