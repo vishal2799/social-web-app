@@ -277,6 +277,13 @@
       "img": "./images/user-7.png",
       "name": "Alicia Bunker",
       "id": 10
+    },
+    {
+      "postId": 2,
+      "userId": 6,
+      "img": "./images/user-7.png",
+      "name": "Nikki",
+      "id": 11
     }
   ],
   "userProfile": [
@@ -323,6 +330,11 @@
       "id": 3,
       "userId": 5,
       "followingId": 3
+    },
+    {
+      "userId": 6,
+      "followingId": 3,
+      "id": 4
     }
   ]
 }

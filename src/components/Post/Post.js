@@ -5,7 +5,6 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
-import postPerson from '../../assets/images/user-7.png'
 import UserDetail from '../UI/UserDetail/UserDetail';
 import Button from '../UI/Button/Button';
 import Comments from '../Comments/Comments'

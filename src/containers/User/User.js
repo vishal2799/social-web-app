@@ -28,16 +28,69 @@ function User() {
     let [followings, setFollowings] = useState([]);
     let [followers, setFollowers] = useState([]);
     let [following, setFollowing] = useState(false);
+    let [follower, setFollower] = useState();
     
 
     if(user.user.id == params.userId) {
         navigate("/profile")
     }
 
+    const toggleFollow = () => {
+      if(!loading) {
+      setLoading(true);
+      let token = localStorage.getItem('user');
+        token = JSON.parse(token).accessToken;
+      if(following){
+        let id = follower.id;
+        let url = "http://localhost:3000/followingRelationships/" + id;
+
+        axios.delete(url, { 
+          headers: { 
+            'Authorization': `Bearer ${token}`
+           }
+          })
+          .then(function (response) {
+            setFollowing(prevState => !prevState);
+            setFollowers(followers.filter(follower => follower.id !== id));
+            setLoading(false);
+            console.log(response);
+        })
+          .catch(function (error) {
+            setLoading(false);
+            console.log(error);
+          });  
+
+      } else {
+        let url = "http://localhost:3000/followingRelationships";
+        let userId = localStorage.getItem('user');
+        userId = JSON.parse(userId).user.id;
+        let followingId = +(params.userId)
+        axios.post(url, {userId, followingId}, 
+          { headers: { 'Authorization': `Bearer ${token}` }
+          })
+          .then(function (response) {
+            setFollowing(prevState => !prevState);
+            setFollowers([...followers, response.data])
+            setFollower(response.data);
+            setLoading(false);
+            console.log(response);
+        })
+          .catch(function (error) {
+            setLoading(false);
+            console.log(error);
+          });
+
+      }
+
+    }
+    
+    }
+
     const isFollowing = (dataa) => {
         for(let data of dataa) {
             if(data.userId === user.user.id) {
               setFollowing(true);
+              setFollower(data);
             } else {
               setFollowing(false);
             }
@@ -118,7 +171,7 @@ useEffect(() => {
                     </div>
                 </div>
                 <div className={classes.CTA}>
-                    <Button variant="contained">{following ? 'Following' : 'Follow'}</Button>
+                    <Button variant="contained" onClick={toggleFollow}>{following ? 'Following' : 'Follow'}</Button>
                     <span><IconButton><EmailOutlinedIcon /></IconButton></span>
                     <span><IconButton><MoreHorizOutlinedIcon /></IconButton></span>
                 </div>
