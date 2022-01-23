@@ -13,6 +13,7 @@ import MoreDropdown from '../UI/MoreDropdown/MoreDropdown';
 import Modal2 from '../UI/Modal2/Modal2';
 import { PostContext } from '../../Context/Post/PostContext';
 import { AuthContext } from '../../Context/Auth/AuthContext';
+import axios from 'axios'
 
 // const comments = [
 //     {comment: 'Comment 1', img: postPerson, name: 'Alicia Bunker'},
@@ -25,46 +26,110 @@ import { AuthContext } from '../../Context/Auth/AuthContext';
 // ]
 
 const Post = ({ post }) => {
-    const { removePost, addLike, isLiked, getLikes, loadingLikes, isLoading, addLikeLoading } = useContext(PostContext);
+    const { removePost } = useContext(PostContext);
     const { user } = useContext(AuthContext);
     const [postComments, setPostComments] = useState(false);
-    const [liked, setLiked] = useState(false);
-    const [likedId, setLikedId] = useState();
+
+    const [comments, setComments] = useState([]);
+   
     const [mName, setMName] = useState('');
     const [modal, setModal] = useState(false);
 
-    const isLikedd = () => {
-        getLikes(post.id, afterLike);
-    }
-
-    const afterLike = (likes) => {
-        if(!addLikeLoading){
-
-            let userid = user.user.id;
-  if(!loadingLikes) {
-  for(let like of likes) {
-    if(like.userId == userid) {
-      console.log(like.userId, userid, like.id);
-      setLikedId(like.id);
-      setLiked(true);
-    } else {
-      setLikedId(null);
-      setLiked(false);
-    }
-  }
-}
-
-        } 
-    }
+    const [loading, setLoading] = useState(false);
+    const [liked, setLiked] = useState(false);
+    const [likes, setLikes] = useState([]);
+    const [like, setLike] = useState();
 
     useEffect(() => {
-        isLikedd();
-    }, [])
+      getPostData(post.id);
+    }, [post.id]);
+    
 
-     const toggleLike = () => {
-        addLike(liked, likedId, post.id);
-        setLiked(prevState => !prevState);
-     }
+    const getPostData = (id) => {
+        setLoading(true);
+        let token = localStorage.getItem('user');
+        token = JSON.parse(token).accessToken;
+        let endpoints = [
+          `http://localhost:3000/comments?postId=${id}`,
+          `http://localhost:3000/likes?postId=${id}`
+        ];
+
+          Promise.all(endpoints.map((endpoint) => axios.get(endpoint, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          }))).then(([{data: comments}, {data: likes}] )=> {
+            // console.log({ user, followers, following });
+            setComments(comments);
+            setLikes(likes);
+            isLiked(likes);
+            setLoading(false);
+      }); 
+
+}
+
+    const toggleLike = () => {
+        if(!loading) {
+        setLoading(true);
+        let token = localStorage.getItem('user');
+          token = JSON.parse(token).accessToken;
+        if(liked){
+          let id = like.id;
+          let url = "http://localhost:3000/likes/" + id;
+  
+          axios.delete(url, { 
+            headers: { 
+              'Authorization': `Bearer ${token}`
+             }
+            })
+            .then(function (response) {
+              setLiked(prevState => !prevState);
+              setLikes(likes.filter(like => like.id !== id));
+              setLoading(false);
+              console.log(response);
+          })
+            .catch(function (error) {
+              setLoading(false);
+              console.log(error);
+            });  
+  
+        } else {
+          let url = "http://localhost:3000/likes";
+          let userId = localStorage.getItem('user');
+          userId = JSON.parse(userId).user.id;
+          let postId = post.id; 
+          axios.post(url, {userId, postId}, 
+            { headers: { 'Authorization': `Bearer ${token}` }
+            })
+            .then(function (response) {
+              setLiked(prevState => !prevState);
+              setLikes([...likes, response.data])
+              setLike(response.data);
+              setLoading(false);
+              console.log(response);
+          })
+            .catch(function (error) {
+              setLoading(false);
+              console.log(error);
+            });
+  
+        }
+  
+      }
+      
+      }
+  
+      const isLiked = (dataa) => {
+          for(let data of dataa) {
+              if(data.userId === user.user.id) {
+                setLiked(true);
+                setLike(data);
+              } else {
+                setLiked(false);
+              }
+            }
+      }
+
 
     const showModal = (mName) => {
         setMName(mName);
@@ -81,11 +146,6 @@ const Post = ({ post }) => {
 
     const commentsCancelHandler = () => {
         setPostComments(false);
-    }
-
-    const clickLike = (postId, id) => {
-        addLike(postId);
-        isLiked(id);
     }
 
     return (
@@ -111,7 +171,6 @@ const Post = ({ post }) => {
                         </div>
                         <div className={classes.PostSocial}>
                             <Button variant="text" width="33%" onClick={toggleLike} startIcon={liked ? <FavoriteIcon /> : <FavoriteBorderIcon />} >{liked ? 'Liked' : 'Like'}</Button>
-                                {/* <Button variant="text" width="33%" startIcon={<ThumbUpOutlinedIcon />} onClick={() => clickLike(post.id, like.id)}>Like</Button> */}
                             <Button variant="text" width="33%" borderLeft="1px solid #eee" borderRight="1px solid #eee" startIcon={<ChatBubbleOutlineOutlinedIcon />} onClick={() => showModal('comment')} >Comment</Button>
                             <Button variant="text" width="33%" startIcon={<ShareOutlinedIcon />}>Share</Button>
                 </div>

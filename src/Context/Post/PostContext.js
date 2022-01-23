@@ -7,8 +7,6 @@ const PostContextProvider = (props) => {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const [addLikeLoading, setAddLikeLoading] = useState(false);
-
     const [loadingComments, setLoadingComments] = useState(false);
 
   const [posts, setPosts] = useState([]);
@@ -125,82 +123,6 @@ const PostContextProvider = (props) => {
   };
 
 
-   const addLike = (liked, likedId, postId) => {
-    if(liked) {
-      setAddLikeLoading(true);
-      let url = "http://localhost:3000/likes/" + likedId;
-      let token = localStorage.getItem('user');
-      token = JSON.parse(token).accessToken;
-      axios.delete(url, {
-          headers: {
-              'Authorization': `Bearer ${token}`
-            }
-      })
-      .then((res) => {
-          setLikes(prev => (prev.filter(like => like.id !== likedId)));
-          setAddLikeLoading(false);
-          console.log(res + 'addLike new delete');
-      })
-      .catch(err => {
-          setAddLikeLoading(false);
-      })
-    } else {
-      setAddLikeLoading(true);
-    let url = "http://localhost:3000/likes";
-    let userId = localStorage.getItem('user');
-    userId = JSON.parse(userId).user.id;
-    let img = localStorage.getItem('user');
-    img = JSON.parse(img).user.img;
-    let name = localStorage.getItem('user');
-    name = JSON.parse(name).user.name;
-    let token = localStorage.getItem('user');
-    token = JSON.parse(token).accessToken;
-    axios.post(url, { postId, userId, img, name }, 
-      { headers: { 'Authorization': `Bearer ${token}` }
-      })
-      .then(function (response) {
-        console.log(response);
-        setLikes(prev => ([...prev, {id: response.data.id, userId, name, img}]))
-        setAddLikeLoading(false);
-        console.log(response + 'addlike new like')
-    })
-      .catch(function (error) {
-        setAddLikeLoading(false);
-      });  
-    }
-   };
-
-  const removeLike = (id) => {
-    let url = "http://localhost:3000/likes" + id;
-    let token = localStorage.getItem('user');
-    token = JSON.parse(token).accessToken;
-    axios.delete(url, {
-        headers: {
-            'Authorization': `Bearer ${token}`
-          }
-    })
-    .then((res) => {
-        setLikes(prev => (prev.filter(like => like.id !== id)));
-    })
-    .catch(err => {
-        setIsLoading(false);
-    })
-  };
-
-  const isLiked = (postId, id) => {
-    let userid = localStorage.getItem('user');
-      userid = JSON.parse(userid).user.id;
-      for(let like of likes) {
-        if(like.userId === userid) {
-          removeLike(id);
-          console.log('UnLiked');
-        } else {
-          addLike(postId);
-          console.log('Liked');
-        }
-      }
-  }
-
   const removePost = (id) => {
     let url = "http://localhost:3000/posts/" + id;
     let token = localStorage.getItem('user');
@@ -219,7 +141,7 @@ const PostContextProvider = (props) => {
   }
 
   return (
-    <PostContext.Provider value={{ posts, addPost, removePost, getPosts, isLoading, addComment, addLike, getComments, comments, loadingComments, getLikes, likes, loadingLikes, isLiked, addLikeLoading }}>
+    <PostContext.Provider value={{ posts, addPost, removePost, getPosts, isLoading, addComment, getComments, comments, loadingComments, getLikes, likes, loadingLikes }}>
       {props.children}
     </PostContext.Provider>
   );
